@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h2>Add Item to Inventory</h2>
+  <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+  <br>
+  <a href="{% url 'home' %}" class="btn btn-success">Return to home</a>
+{% endblock %}

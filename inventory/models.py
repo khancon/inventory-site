@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from phone_field import PhoneField
 
 
 # Create your models here.
@@ -11,13 +10,14 @@ class User(models.Model):
     last_name = models.CharField(max_length=250, default=None)
     street = models.CharField(max_length=250, default=None)
     city = models.CharField(max_length=250, default=None)
-    state = models.CharField(
-        max_length=2,
-        choices=US_STATES,
-        default=None
-    )
-    zip_code  = models.CharField(max_length=5, validators=[MaxValueValidator(99999), MinValueValidator(00000)])
-    phone_number = PhoneField(blank=True, help_text='Contact phone number')
+    state = models.CharField(max_length=2, choices=US_STATES,default=None)
+    zip_code  = models.IntegerField(validators=[MaxValueValidator(99999), MinValueValidator(00000)], default=None)
+    phone_number = models.IntegerField(validators=[MinValueValidator(0000000000), MaxValueValidator(9999999999)], default=None)
 
 
-
+class Item(models.Model):
+    item_name = models.CharField(max_length=250, default=None)
+    price = models.DecimalField(max_digits=7, decimal_places=2, default=00000.00)
+    stock_quantity = models.IntegerField(default=None)
+    description = models.TextField(blank=True, default=None)
+    photo = models.ImageField(upload_to='images')

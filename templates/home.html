@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a class="btn btn-primary" role="button" href="{% url 'add_item' %}" >+ Add Item</a>
+    <br><br>
+    {% if item_count > 0 %}
+        {% for item in items %}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <img class="img-fluid" src="{{item.photo.url}}" alt="Card image cap">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.item_name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">${{item.price}}/unit | Only {{item.stock_quantity}} left in stock</h6>
+                            <p class="card-text">{{item.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <br>
+        {% endfor %}
+        <!-- <div class="row">
+            {% for item in items %} 
+                <div class="col-md-6">
+                    <a href="#">
+                        <div class="card">
+                            <img class="card-img-top" src="{{item.photo.url}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.item_name}}</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div> -->
+    {% else %}
+    <p>No Items</p>
+    {% endif %}
+{% endblock %}

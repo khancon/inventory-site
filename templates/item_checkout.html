@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>{{item.item_name}}</h2>
+    <hr>
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img class="img-fluid" src="{{item.photo.url}}" alt="Card image cap">
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <h3 style="color:purple">${{item.price}}/unit</h3>
+                <h6 class="card-text">{{item.description}}</h6>
+                <h3 style="color:red">Only {{item.stock_quantity}} left in stock</h3>
+                <br>
+                <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
+                    <button type="submit" name="item_id" class="btn btn-success" value="{{item.id}}">Checkout as Guest</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <a href="{% url 'home' %}" class="btn btn-success">Return to home</a>
+{% endblock %}

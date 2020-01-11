@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import redirect, render
 
 from .models import Item
@@ -35,3 +35,10 @@ def home_display_items(request):
     items = Item.objects.all()
     print(items)
     return render(request, 'home.html', {'items': items, 'item_count': Item.objects.count()})
+
+def item_checkout(request, item_id):
+    try:
+        item = Item.objects.get(pk=item_id)
+    except Item.DoesNotExist:
+        raise Http404("Item does not exist")
+    return render(request, 'item_checkout.html', {'item': item})

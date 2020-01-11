@@ -24,5 +24,7 @@ from inventory import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_display_items, name='home'),
-    path('add_item/', views.add_item, name='add_item')
+    path('add_item/', views.add_item, name='add_item'),
+    path('item_checkout/<int:item_id>', views.item_checkout, name='item_checkout'),
+    path('item_checkout/<int:item_id>/guest_checkout', views.guest_checkout, name='item_checkout')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
